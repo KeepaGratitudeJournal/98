@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>時光重塑：重新看見人生的美好</title>
+  <style>
+    :root {
+      --primary: #2d6a4f;
+      --primary-light: #e8f5e9;
+      --bg: #f9fbf9;
+      --card: #ffffff;
+      --text: #222222;
+      --border: #c8d6cb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans TC", sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 16px;
+      display: flex;
+      justify-content: center;
+      font-size: 19px;
+      line-height: 1.7;
+    }
+    .container {
+      background: var(--card);
+      max-width: 520px;
+      width: 100%;
+      border-radius: 20px;
+      padding: 24px 20px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+      border: 1px solid #eef2ee;
+    }
+    h1 {
+      font-size: 1.5rem;
+      margin-top: 0;
+      color: var(--primary);
+      text-align: center;
+      line-height: 1.4;
+    }
+    .intro {
+      font-size: 1.05rem;
+      color: #444;
+      text-align: center;
+      margin-bottom: 24px;
+      background: var(--primary-light);
+      padding: 14px 16px;
+      border-radius: 12px;
+    }
+    .step-tag {
+      display: inline-block;
+      background: #e0ece4;
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.95rem;
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin-bottom: 8px;
+    }
+    label, .question-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #1b4332;
+      display: block;
+      margin-bottom: 12px;
+      line-height: 1.5;
+    }
+    textarea, input[type="text"] {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 16px;
+      font-family: inherit;
+    }
+    textarea:focus, input[type="text"]:focus {
+      outline: none;
+      border-color: var(--primary);
+    }
+    .main-btn {
+      background: var(--primary);
+      color: #ffffff;
+      border: none;
+      padding: 16px 20px;
+      font-size: 1.2rem;
+      font-weight: 700;
+      border-radius: 14px;
+      cursor: pointer;
+      width: 100%;
+      box-shadow: 0 4px 10px rgba(45, 106, 79, 0.25);
+      transition: opacity 0.2s;
+    }
+    .main-btn:disabled {
+      background: #95b8a6;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+    .option-btn {
+      background: #ffffff;
+      color: #1b4332;
+      text-align: left;
+      margin-bottom: 12px;
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      padding: 16px 18px;
+      font-size: 1.1rem;
+      line-height: 1.5;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      transition: all 0.2s;
+    }
+    .option-btn:active, .option-btn:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
+    }
+    .custom-box {
+      margin-top: 12px;
+      padding-top: 14px;
+      border-top: 1px dashed var(--border);
+    }
+    .sub-btn {
+      background: #e0ece4;
+      color: var(--primary);
+      border: none;
+      padding: 12px 16px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      border-radius: 12px;
+      cursor: pointer;
+      width: 100%;
+    }
+    .hidden { display: none !important; }
+    .result-box {
+      background: #f0f7f3;
+      border-left: 6px solid var(--primary);
+      padding: 20px;
+      border-radius: 12px;
+      margin: 20px 0;
+      font-size: 1.15rem;
+      line-height: 1.8;
+      color: #1b3a2b;
+      font-weight: 600;
+    }
+    .loading {
+      text-align: center;
+      color: #40916c;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-top: 16px;
+      padding: 12px;
+    }
+    .error-msg {
+      background: #fff0f0;
+      color: #c92a2a;
+      border: 1px solid #ffc9c9;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      margin-top: 14px;
+      text-align: center;
+    }
+    .privacy-hint {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #777;
+      margin-top: 24px;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h1>時光重塑・回甘人生</h1>
+  <div class="intro">每一步走過的路，無論晴雨都是獨特的印記。讓我們換個角度，找回當初陪伴你的堅韌與感謝。</div>
+
+  <!-- 步驟 1: 輸入經歷 -->
+  <div id="step-1">
+    <span class="step-tag">第一步：說說故事</span>
+    <label for="eventText">請寫下一件過去讓您覺得辛苦、受挫或煩惱的經歷：</label>
+    <textarea id="eventText" rows="4" placeholder="例如：過去在工作或家庭中遇到困難，當時覺得壓力好大..."></textarea>
+    <button id="btn-start" class="main-btn" onclick="startQuestion1()">開始探索新角度</button>
+    <div id="loading1" class="loading hidden">正在細心閱讀您的故事...</div>
+    <div id="error1" class="error-msg hidden"></div>
+  </div>
+
+  <!-- 步驟 2: 第一題引導（看見自己的力量） -->
+  <div id="step-2" class="step hidden">
+    <span class="step-tag">第二步：看見力量</span>
+    <div class="question-title" id="q1-title">回頭想想，這件事展現了您什麼樣的優點或能力？</div>
+    <div id="options-q1"></div>
+    <div class="custom-box">
+      <input type="text" id="custom-q1" placeholder="或者，自己寫下您的想法...">
+      <button class="sub-btn" onclick="submitCustomQ1()">送出我的想法</button>
+    </div>
+    <div id="loading2" class="loading hidden">正在為您準備下一步思考...</div>
+    <div id="error2" class="error-msg hidden"></div>
+  </div>
+
+  <!-- 步驟 3: 第二題引導（發現感謝與轉機） -->
+  <div id="step-3" class="step hidden">
+    <span class="step-tag">第三步：感恩與收穫</span>
+    <div class="question-title" id="q2-title">如果用感恩的眼光來看，這件事為您帶來了什麼？</div>
+    <div id="options-q2"></div>
+    <div class="custom-box">
+      <input type="text" id="custom-q2" placeholder="或者，自己寫下最感謝的事...">
+      <button class="sub-btn" onclick="submitCustomQ2()">送出我的想法</button>
+    </div>
+    <div id="loading3" class="loading hidden">正在為您整理溫暖的體悟...</div>
+    <div id="error3" class="error-msg hidden"></div>
+  </div>
+
+  <!-- 步驟 4: 簡短溫暖總結 -->
+  <div id="step-4" class="step hidden">
+    <span class="step-tag">生命的禮物</span>
+    <div class="question-title">為您整理的心靈小語：</div>
+    <div class="result-box" id="finalResult"></div>
+    <button class="main-btn" onclick="resetFlow()">再想另一個故事</button>
+  </div>
+
+  <div class="privacy-hint">※ 本練習完全匿名，不儲存任何內容，關閉網頁即自動清除。</div>
+</div>
+
+<script>
+  const WORKER_URL = "https://green-term-0f04.siweili60.workers.dev";
+
+  let userStory = "";
+  let answer1 = "";
+  let answer2 = "";
+
+  async function callAI(promptText, isJson = false) {
+    const res = await fetch(WORKER_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ prompt: promptText, isJson: isJson })
+    });
+    
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new Error(data.error || `伺服器回應錯誤 (${res.status})`);
+    }
+    return data.text;
+  }
+
+  function showError(stepNum, msg) {
+    const el = document.getElementById(`error${stepNum}`);
+    el.innerText = `連線遇到小狀況：${msg}（請稍候幾秒再按一次）`;
+    el.classList.remove("hidden");
+  }
+
+  function hideError(stepNum) {
+    document.getElementById(`error${stepNum}`).classList.add("hidden");
+  }
+
+  // 第一題：引導看見自己的韌性與優勢
+  async function startQuestion1() {
+    userStory = document.getElementById("eventText").value.trim();
+    if (!userStory) return alert("請先寫下一點您的經歷喔！");
+
+    const btn = document.getElementById("btn-start");
+    btn.disabled = true;
+    hideError(1);
+    document.getElementById("loading1").classList.remove("hidden");
+
+    const prompt = `
+使用者分享了這段生活經歷：
+"${userStory}"
+
+請為這位長者設計第一題「發現自己內在力量」的單選題。
+選項要口語化、溫和、每項約 15-25 字，選項請偏向：堅持與責任感、應變解決問題的能力、面對困難的勇氣等優點。
+
+請輸出 JSON 格式：
+{
+  "question": "回頭想想，在面對這件事的過程中，您看見自己哪一項寶貴的能力？",
+  "options": [
+    {"label": "選項文字1"},
+    {"label": "選項文字2"},
+    {"label": "選項文字3"}
+  ]
+}`;
+
+    try {
+      const res = await callAI(prompt, true);
+      const parsed = JSON.parse(res.replace(/```json|```/g, '').trim());
+
+      document.getElementById("q1-title").innerText = parsed.question;
+      const box = document.getElementById("options-q1");
+      box.innerHTML = "";
+
+      parsed.options.forEach((opt) => {
+        const optBtn = document.createElement("button");
+        optBtn.className = "option-btn";
+        optBtn.innerText = opt.label;
+        optBtn.onclick = () => chooseQ1(opt.label);
+        box.appendChild(optBtn);
+      });
+
+      document.getElementById("step-1").classList.add("hidden");
+      document.getElementById("step-2").classList.remove("hidden");
+    } catch (e) {
+      showError(1, e.message);
+    } finally {
+      btn.disabled = false;
+      document.getElementById("loading1").classList.add("hidden");
+    }
+  }
+
+  function submitCustomQ1() {
+    const val = document.getElementById("custom-q1").value.trim();
+    if (!val) return alert("請先輸入您的想法，或直接點選上方選項喔！");
+    chooseQ1(val);
+  }
+
+  // 第二題：引導感恩與外界支持/未來轉機
+  async function chooseQ1(selected) {
+    answer1 = selected;
+    hideError(2);
+    document.getElementById("loading2").classList.remove("hidden");
+
+    const prompt = `
+長者故事："${userStory}"
+長者看見自己的力量："${answer1}"
+
+請為長者設計第二題「用感恩眼光看過去」的單選題。
+選項要口語溫暖、每項約 15-25 字，方向為：學會珍惜身邊的善意、這段考驗讓自己走得更穩、或放下執念看清自己真正想要的生活。
+
+請輸出 JSON 格式：
+{
+  "question": "經歷過這段過程後，若以感恩的心情回顧，您覺得最值得感謝的是什麼？",
+  "options": [
+    {"label": "選項文字1"},
+    {"label": "選項文字2"},
+    {"label": "選項文字3"}
+  ]
+}`;
+
+    try {
+      const res = await callAI(prompt, true);
+      const parsed = JSON.parse(res.replace(/```json|```/g, '').trim());
+
+      document.getElementById("q2-title").innerText = parsed.question;
+      const box = document.getElementById("options-q2");
+      box.innerHTML = "";
+
+      parsed.options.forEach((opt) => {
+        const optBtn = document.createElement("button");
+        optBtn.className = "option-btn";
+        optBtn.innerText = opt.label;
+        optBtn.onclick = () => chooseQ2(opt.label);
+        box.appendChild(optBtn);
+      });
+
+      document.getElementById("step-2").classList.add("hidden");
+      document.getElementById("step-3").classList.remove("hidden");
+    } catch (e) {
+      showError(2, e.message);
+    } finally {
+      document.getElementById("loading2").classList.add("hidden");
+    }
+  }
+
+  function submitCustomQ2() {
+    const val = document.getElementById("custom-q2").value.trim();
+    if (!val) return alert("請先輸入您的想法，或直接點選上方選項喔！");
+    chooseQ2(val);
+  }
+
+  // 產出極簡溫暖總結（60-80 字，大字易讀）
+  async function chooseQ2(selected) {
+    answer2 = selected;
+    hideError(3);
+    document.getElementById("loading3").classList.remove("hidden");
+
+    const prompt = `
+故事："${userStory}"
+長者認為自己的特點："${answer1}"
+長者感謝與體悟："${answer2}"
+
+請寫一段專門給長者閱讀的心靈總結：
+1. 嚴格限制在 60 到 80 個中文字以內。
+2. 語氣如同溫暖親切的陪伴者，給予長者深深的肯定與敬意。
+3. 簡潔、有力、排版清晰，切勿長篇大論。`;
+
+    try {
+      const resultText = await callAI(prompt, false);
+      document.getElementById("finalResult").innerText = resultText;
+      document.getElementById("step-3").classList.add("hidden");
+      document.getElementById("step-4").classList.remove("hidden");
+    } catch (e) {
+      showError(3, e.message);
+    } finally {
+      document.getElementById("loading3").classList.add("hidden");
+    }
+  }
+
+  function resetFlow() {
+    document.getElementById("eventText").value = "";
+    document.getElementById("custom-q1").value = "";
+    document.getElementById("custom-q2").value = "";
+    document.getElementById("step-4").classList.add("hidden");
+    document.getElementById("step-1").classList.remove("hidden");
+  }
+</script>
+
+</body>
+</html>
